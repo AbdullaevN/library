@@ -8,6 +8,7 @@ import SingleBook from "./SingleBook";
 const AddBook = (props) => {
   console.log(props, "props");
   const [textBook, setTextBook] = useState("");
+  const [author, setAuthor] = useState("");
   const books = useSelector((state) => {
     console.log("redux-state", state);
     const { bookReducer } = state;
@@ -20,12 +21,15 @@ const AddBook = (props) => {
   const handleInput = (e) => {
     setTextBook(e.target.value);
   };
+  const hanldeAuthor = (e) => {
+    setAuthor(e.target.value);
+  };
 
   //
   const handleSubmit = (e) => {
     e.preventDefault();
     const id = uniqid();
-    dispatch(bookCreate(textBook, id));
+    dispatch(bookCreate(textBook, author, id));
   };
 
   //
@@ -64,6 +68,8 @@ const AddBook = (props) => {
               Author
             </label>
             <input
+              value={author}
+              onChange={hanldeAuthor}
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="grid-last-name"
               type="text"

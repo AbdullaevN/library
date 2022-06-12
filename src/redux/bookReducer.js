@@ -1,4 +1,4 @@
-import { BOOK_CREATE, BOOK_UPDATE, BOOK_DELETE } from "./types";
+import { BOOK_CREATE, BOOK_UPDATE, BOOK_DELETE, BOOK_LOAD } from "./types";
 
 const initialState = {
   books: [],
@@ -24,6 +24,18 @@ export const bookReducer = (state = initialState, action) => {
         ...books.slice(itemIndex + 1),
       ];
       return { ...state, books: nextBooks };
+
+    case BOOK_LOAD:
+      // eslint-disable-next-line no-case-declarations
+      const booksNew = action.data.map((res) => {
+        return {
+          text: res.name,
+          author: res.name,
+          id: res.id,
+        };
+      });
+      return { ...state, books: booksNew };
+
     case BOOK_DELETE:
       return (() => {
         // eslint-disable-next-line no-unused-vars

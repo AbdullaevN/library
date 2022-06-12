@@ -11,7 +11,13 @@ const BookLists = () => {
 
   return (
     <div>
-      {books && books.map((book) => <label htmlFor="Nmae"> {book.id}</label>)}
+      {books &&
+        books.map((book) => (
+          <label htmlFor="Nmae" key={book.id}>
+            {" "}
+            {book.id}
+          </label>
+        ))}
     </div>
   );
 };
